@@ -19,7 +19,7 @@ class ProjectController{
     
     const project = await db.get(`SELECT * FROM projects WHERE id = (?)`, [id])
     
-    res.send({project})
+    res.send(project)
   }
   
   async index(req, res){
