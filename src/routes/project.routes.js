@@ -5,9 +5,11 @@ const projectRoutes = Router();
 const ProjectController = require('../controllers/ProjectController')
 const projectController = new ProjectController();
 
-projectRoutes.post('/', projectController.create)
+const ensureAuthenticated = require('../middlewares/ensureAuthenticated')
+
+projectRoutes.post('/', ensureAuthenticated, projectController.create)
 projectRoutes.get('/:id', projectController.show)
 projectRoutes.get('/', projectController.index)
-projectRoutes.delete('/:id', projectController.delete)
+projectRoutes.delete('/:id', ensureAuthenticated, projectController.delete)
 
 module.exports = projectRoutes;
