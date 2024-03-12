@@ -11,6 +11,7 @@ async function sqliteConnection(){
   await db.run(`CREATE TABLE IF NOT EXISTS projects (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
+    adress TEXT,
     description TEXT,
     status TEXT
   )`);

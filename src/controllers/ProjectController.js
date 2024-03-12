@@ -3,13 +3,13 @@ const sqliteConnection = require('../database/sqlite')
 
 class ProjectController{
   async create(req, res){
-    const {title, description, status} = req.body;
+    const {title, description, adress, status} = req.body;
 
     const db = await sqliteConnection();
     
-    await db.run(`INSERT INTO projects (title, description, status) VALUES (?, ?, ?)`, [title, description, status]);
+    await db.run(`INSERT INTO projects (title, description, status, adress) VALUES (?, ?, ?, ?)`, [title, description, status, adress]);
     
-    res.json({ title, description, status })
+    res.json({ title, description, status, adress })
   }
   
   async show(req, res){
@@ -28,7 +28,7 @@ class ProjectController{
     const projects = await db.all(`SELECT * FROM projects`);
     
     res.send({projects})
-  }
+  } 
 
   async delete(req, res) {
     const { id } = req.params;
