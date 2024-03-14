@@ -16,6 +16,13 @@ async function sqliteConnection(){
     status TEXT
   )`);
 
+  await db.run(`CREATE TABLE IF NOT EXISTS project_images (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id INTEGER,
+    img TEXT,
+    FOREIGN KEY(project_id) REFERENCES projects(id)
+  )`);
+
   return db;
 }
 
