@@ -14,7 +14,7 @@ class ProjectController{
 
     for (const img of imgs) {
       diskStorage.saveFile(img);
-      await db.run(`INSERT INTO project_images (project_id, imagem) VALUES (?, ?)`, [projectID, img]);
+      await db.run(`INSERT INTO project_images (project_id, img) VALUES (?, ?)`, [projectID, img]);
     }
     
     res.json({ title, description, status, adress, imgs })
@@ -26,7 +26,7 @@ class ProjectController{
     const db = await sqliteConnection();
     
     const project = await db.get(`SELECT * FROM projects WHERE id = (?)`, [id])
-    const imgs = await db.all(`SELECT (imagem) FROM project_images WHERE project_id = (?)`, [id])
+    const imgs = await db.all(`SELECT img FROM project_images WHERE project_id = (?)`, [id])
     
     res.send({project, imgs})
   }
