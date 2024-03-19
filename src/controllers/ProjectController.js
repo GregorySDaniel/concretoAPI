@@ -34,10 +34,19 @@ class ProjectController{
   async index(req, res){
     const db = await sqliteConnection();
     
-    const projects = await db.all(`SELECT * FROM projects`);
+    const projects = await db.all(`
+      SELECT projects.*, project_images.img
+      FROM projects
+      INNER JOIN (
+        SELECT project_id, MIN(img) AS img
+        FROM project_images
+        GROUP BY project_id
+      ) AS project_images ON projects.id = project_images.project_id
+    `);
     
     res.send({projects})
-  } 
+  }
+  
 
   async delete(req, res) {
     const { id } = req.params;
