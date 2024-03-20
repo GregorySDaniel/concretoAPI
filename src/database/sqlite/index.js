@@ -20,6 +20,7 @@ async function sqliteConnection(){
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     project_id INTEGER,
     img TEXT,
+    is_main INTEGER DEFAULT 0,
     FOREIGN KEY(project_id) REFERENCES projects(id)
   )`);
 
